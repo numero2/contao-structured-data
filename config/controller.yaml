@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        autoconfigure: true
+
+
+    numero2\StructuredDataBundle\Controller\ContentElement\StructuredDataController: ~

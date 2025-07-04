@@ -1,0 +1,43 @@
+{
+    "name": "numero2/contao-structured-data",
+    "type": "contao-bundle",
+    "description": "Provides Content Elements to create structured data (JSON-LD).",
+    "keywords": ["json-ld", "contao", "backend", "seo"],
+    "license": "LGPL-3.0-or-later",
+    "authors": [{
+            "name": "numero2 - Agentur für digitales Marketing GbR",
+            "homepage": "https://www.numero2.de"
+        }
+    ],
+    "require": {
+        "contao/core-bundle": "^5.3",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/translation-contracts": "^3.0",
+        "menatwork/contao-multicolumnwizard-bundle": "^3.6",
+        "spatie/schema-org": "^3.4"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "extra": {
+        "contao-manager-plugin": "numero2\\StructuredDataBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "numero2\\StructuredDataBundle\\": "src/"
+        },
+        "classmap": [
+            "contao/"
+        ],
+        "exclude-from-classmap": [
+            "contao/config/",
+            "contao/dca/",
+            "contao/languages/",
+            "contao/templates/"
+        ]
+    }
+}

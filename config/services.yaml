@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+
+    numero2\StructuredDataBundle\EventListener\DataContainer\ContentListener: ~
