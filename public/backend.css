@@ -1,0 +1,13 @@
+.widget table[data-name^=structuredData] td:first-child,
+.widget table[data-name^=structuredData] .tl_modulewizard td:last-child {
+  width: unset;
+}
+.widget table[data-name^=structuredData] td.operations {
+  vertical-align: middle;
+}
+.widget table[data-name^=structuredData] td.operations a {
+  display: inline-flex !important;
+  margin-left: 6px;
+}
+
+/*# sourceMappingURL=backend.css.map */

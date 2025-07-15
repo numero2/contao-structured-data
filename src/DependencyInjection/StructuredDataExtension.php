@@ -31,6 +31,7 @@ class StructuredDataExtension extends Extension {
         );
 
         $loader->load('controller.yaml');
+        $loader->load('listener.yaml');
         $loader->load('services.yaml');
     }
 }

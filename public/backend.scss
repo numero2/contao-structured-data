@@ -1,0 +1,17 @@
+.widget table[data-name^="structuredData"] {
+
+    td:first-child,
+    .tl_modulewizard td:last-child {
+        width: unset;
+    }
+
+    td.operations {
+
+        vertical-align: middle;
+
+        a {
+            display: inline-flex !important;
+            margin-left: 6px;
+        }
+    }
+}

@@ -33,18 +33,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['structuredDataFAQPage_mainEntity'] =
     'eval' => [
         'columnFields' => [
             'question' => [
-                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityQuestion'],
-                'inputType' => 'text',
-                //'eval'      => ['style'=>'width:300px', 'mandatory'=>true],
-            ],
-            'answer' => [
-                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityAnswer'],
-                'inputType' => 'text',
-                //'eval'      => ['style'=>'width:400px', 'mandatory'=>true],
-            ],
-        ],
-        'tl_class' => 'clr',
-        'doNotSaveEmpty' => true,
+                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityQuestion']
+            ,   'inputType' => 'text'
+            ]
+        ,   'answer' => [
+                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityAnswer']
+            ,   'inputType' => 'text'
+            ]
+        ]
+    ,   'tl_class' => 'clr'
+    ,   'doNotSaveEmpty' => true
     ]
 ];
 

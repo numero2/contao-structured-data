@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+
+    numero2\StructuredDataBundle\EventListener\KernelResponse\BackendAssetsListener:
+        arguments:
+            - '@contao.routing.scope_matcher'
+        tags:
+            - kernel.event_subscriber
