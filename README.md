@@ -6,12 +6,12 @@ Contao Structured Data Bundle
 
 ## About
 
-This bundle provides content elements that allow you to easily add structured data to your Contao website using the JSON-LD format. By integrating structured data, you can enhance your site's visibility and appearance in search engine results, making it easier for search engines to understand your content.
+This bundle provides a Content Element that allows you to easily add structured data to your Contao website using the JSON-LD format. By integrating structured data, you can enhance your site's visibility and appearance in search engine results, making it easier for search engines to understand your content.
 
 
 ## System requirements
 
-* [Contao 5.x](https://github.com/contao/contao)
+* [Contao 4.13](https://github.com/contao/contao) or newer
 
 
 ## Installation & Configuration

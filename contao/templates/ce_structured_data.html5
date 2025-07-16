@@ -1,0 +1,3 @@
+<?php //this element won't create any visible markup in the frontend ?>
+
+<pre><?= $this->json ?></pre>

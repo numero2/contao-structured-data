@@ -3,4 +3,7 @@ services:
         autoconfigure: true
 
 
-    numero2\StructuredDataBundle\Controller\ContentElement\StructuredDataController: ~
+    numero2\StructuredDataBundle\Controller\ContentElement\StructuredDataController:
+        arguments:
+            - '@contao.routing.scope_matcher'
+            - '@contao.routing.response_context_accessor'

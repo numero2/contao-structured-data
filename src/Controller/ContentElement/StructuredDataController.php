@@ -15,8 +15,10 @@ use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Routing\ResponseContext\JsonLd\JsonLdManager;
-use Contao\CoreBundle\Twig\FragmentTemplate;
+use Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor;
+use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\System;
+use Contao\Template;
 use Spatie\SchemaOrg\Graph;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,15 +28,33 @@ use Symfony\Component\HttpFoundation\Response;
 class StructuredDataController extends AbstractContentElementController {
 
 
-    protected function getResponse( FragmentTemplate $template, ContentModel $model, Request $request ): Response {
+    /**
+     * @var Contao\CoreBundle\Routing\ScopeMatcher
+     */
+    protected ScopeMatcher $scopeMatcher;
+
+    /**
+     * @var Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor
+     */
+    protected ResponseContextAccessor $responseContextAccessor;
+
+
+    public function __construct( ScopeMatcher $scopeMatcher, ResponseContextAccessor $responseContextAccessor ) {
+
+        $this->scopeMatcher = $scopeMatcher;
+        $this->responseContextAccessor = $responseContextAccessor;
+    }
+
+
+    protected function getResponse( Template $template, ContentModel $model, Request $request ): Response {
 
         $json = $model->structuredDataJSON;
 
-        if( !empty($json) && !$this->isBackendScope($request) ) {
+        if( !empty($json) && !$this->scopeMatcher->isBackendRequest($request) ) {
 
             $jsonLd = json_decode($json,true);
 
-            $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
+            $responseContext = $this->responseContextAccessor->getResponseContext();
 
 		    if( $responseContext?->has(JsonLdManager::class) ) {
 
@@ -50,6 +70,13 @@ class StructuredDataController extends AbstractContentElementController {
 
         $template->json = $model->structuredDataJSON;
 
-        return $template->getResponse();
+        if( $this->scopeMatcher->isBackendRequest($request) ) {
+
+            return $template->getResponse();
+
+        } else {
+
+            return new Response('');
+        }
     }
 }

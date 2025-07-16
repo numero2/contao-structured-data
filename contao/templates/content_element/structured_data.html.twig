@@ -1,5 +1,3 @@
-{# this element won't create any visible markup #}
+{# this element won't create any visible markup in the frontend #}
 
-{% if as_editor_view %}
-    {% block editor_view %}<pre>{{ json }}</pre>{% endblock %}
-{% endif %}
+<pre>{{ json }}</pre>

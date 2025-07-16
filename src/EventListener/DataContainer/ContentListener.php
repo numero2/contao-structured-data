@@ -18,12 +18,12 @@ use \ReflectionMethod;
 use Contao\ContentModel;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
+use Contao\CoreBundle\Routing\ResponseContext\JsonLd\JsonLdManager;
+use Contao\CoreBundle\Routing\ResponseContext\ResponseContext;
 use Contao\DataContainer;
 use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
-use numero2\DaytonProgressBundle\ProductModel;
 use Spatie\SchemaOrg\Schema;
-
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -57,7 +57,7 @@ class ContentListener {
      * @return void
      */
     #[AsCallback('tl_content', target: 'config.onload')]
-    public function applySubpaletteForType( DataContainer|null $dc = null ): void {
+    public function applySubpaletteForType( DataContainer|null $dc=null ): void {
 
         if( $dc === null || !$dc->id || $this->requestStack->getCurrentRequest()->query->get('act') !== 'edit' ) {
             return;
@@ -104,7 +104,7 @@ class ContentListener {
      * @return array
      */
     #[AsCallback('tl_content', target: 'fields.structuredDataType.options')]
-    public function getTypeOptions( DataContainer|null $dc = null ): array {
+    public function getTypeOptions( DataContainer|null $dc=null ): array {
 
         $options = [];
         $reflection = new ReflectionClass(Schema::class);
@@ -144,8 +144,14 @@ class ContentListener {
         if( !empty($value) ) {
 
             try {
-                json_decode($value, false, 512, JSON_THROW_ON_ERROR);
-            } catch( JsonException $e ) {
+
+                $jsonLd = json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+
+                $jsonLdManager = new JsonLdManager(new ResponseContext());
+                $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
+
+            } catch( JsonException | Exception $e ) {
+
                 $errorMsg = 'Invalid JSON: ' . $e->getMessage();
                 throw new Exception($errorMsg);
             }
