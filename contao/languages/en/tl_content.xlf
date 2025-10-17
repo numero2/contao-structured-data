@@ -2,43 +2,41 @@
 <xliff version="1.1">
 <file>
 <body>
-    <!-- LEGENDS -->
     <trans-unit id="tl_content.config_legend">
-        <target>Konfiguration</target>
+        <target>Configuration</target>
     </trans-unit>
-    <!-- FIELDS -->
     <trans-unit id="tl_content.structuredDataType.0">
-        <target>Typ für strukturierte Daten</target>
+        <target>Structured Data Type</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataType.1">
-        <target>Wählen Sie welche Art von strukturierte Daten Sie hinterlegen möchten.</target>
+        <target>Select which type of structured data you want to store.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataTypeCustom">
-        <target>Eigenes Markup</target>
+        <target>Custom Markup</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.0">
         <target>JSON-LD</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.1">
-        <target>Sie können den Inhalt eines JSON-LD auch direkt selbst bearbeiten.</target>
+        <target>You can also edit the content of a JSON-LD directly yourself.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.0">
-        <target>JSON-LD Vorschau</target>
+        <target>JSON-LD Preview</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.1">
-        <target>Vorschau des generierten JSON-LD. Wählen Sie als "Typ für strukturierte Daten" einfach "Eigenes Markup" um das JSON manuell anzupassen.</target>
+        <target>Preview of the generated JSON-LD. Simply select "Custom Markup" as the "Structured Data Type" to manually adjust the JSON.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.0">
-        <target>Fragen und Antworten</target>
+        <target>Questions and Answers</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.1">
-        <target>Sie können hier die jeweiligen Fragen und Antworten festlegen.</target>
+        <target>You can define the respective questions and answers here.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityQuestion">
-        <target>Frage</target>
+        <target>Question</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityAnswer">
-        <target>Antwort</target>
+        <target>Answer</target>
     </trans-unit>
 </body>
 </file>
