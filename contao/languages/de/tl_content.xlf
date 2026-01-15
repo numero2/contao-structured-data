@@ -2,41 +2,43 @@
 <xliff version="1.1">
 <file>
 <body>
+    <!-- LEGENDS -->
     <trans-unit id="tl_content.config_legend">
-        <target>Configuration</target>
+        <target>Konfiguration</target>
     </trans-unit>
+    <!-- FIELDS -->
     <trans-unit id="tl_content.structuredDataType.0">
-        <target>Structured Data Type</target>
+        <target>Typ für strukturierte Daten</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataType.1">
-        <target>Select which type of structured data you want to store.</target>
+        <target>Wählen Sie welche Art von strukturierte Daten Sie hinterlegen möchten.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataTypeCustom">
-        <target>Custom Markup</target>
+        <target>Eigenes Markup</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.0">
         <target>JSON-LD</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.1">
-        <target>You can also edit the content of a JSON-LD directly yourself.</target>
+        <target>Sie können den Inhalt eines JSON-LD auch direkt selbst bearbeiten.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.0">
-        <target>JSON-LD Preview</target>
+        <target>JSON-LD Vorschau</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.1">
-        <target>Preview of the generated JSON-LD. Simply select "Custom Markup" as the "Structured Data Type" to manually adjust the JSON.</target>
+        <target>Vorschau des generierten JSON-LD. Wählen Sie als "Typ für strukturierte Daten" einfach "Eigenes Markup" um das JSON manuell anzupassen.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.0">
-        <target>Questions and Answers</target>
+        <target>Fragen und Antworten</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.1">
-        <target>You can define the respective questions and answers here.</target>
+        <target>Sie können hier die jeweiligen Fragen und Antworten festlegen.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityQuestion">
-        <target>Question</target>
+        <target>Frage</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityAnswer">
-        <target>Answer</target>
+        <target>Antwort</target>
     </trans-unit>
 </body>
 </file>
