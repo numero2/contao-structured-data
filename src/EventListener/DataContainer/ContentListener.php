@@ -147,8 +147,10 @@ class ContentListener {
 
                 $jsonLd = json_decode($value, true, 512, JSON_THROW_ON_ERROR);
 
-                $jsonLdManager = new JsonLdManager(new ResponseContext());
-                $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
+                if( $jsonLd !== null && \is_array($jsonLd) ) {
+                    $jsonLdManager = new JsonLdManager(new ResponseContext());
+                    $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
+                }
 
             } catch( JsonException | Exception $e ) {
 

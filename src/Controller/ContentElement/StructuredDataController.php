@@ -5,7 +5,7 @@
  *
  * @author    Benny Born <benny.born@numero2.de>
  * @license   LGPL-3.0-or-later
- * @copyright Copyright (c) 2025, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2026, numero2 - Agentur für digitales Marketing GbR
  */
 
 
@@ -54,17 +54,20 @@ class StructuredDataController extends AbstractContentElementController {
 
             $jsonLd = json_decode($json,true);
 
-            $responseContext = $this->responseContextAccessor->getResponseContext();
+            if( $jsonLd !== null && \is_array($jsonLd) ) {
 
-		    if( $responseContext?->has(JsonLdManager::class) ) {
+                $responseContext = $this->responseContextAccessor->getResponseContext();
 
-		        $jsonLdManager = $responseContext->get(JsonLdManager::class);
-		        $type = $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
+                if( $responseContext?->has(JsonLdManager::class) ) {
 
-                $jsonLdManager
-                    ->getGraphForSchema(JsonLdManager::SCHEMA_ORG)
-                    ->set($type, $jsonLd['identifier'] ?? Graph::IDENTIFIER_DEFAULT)
-                ;
+                    $jsonLdManager = $responseContext->get(JsonLdManager::class);
+                    $type = $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
+
+                    $jsonLdManager
+                        ->getGraphForSchema(JsonLdManager::SCHEMA_ORG)
+                        ->set($type, $jsonLd['identifier'] ?? Graph::IDENTIFIER_DEFAULT)
+                    ;
+                }
             }
         }
 
