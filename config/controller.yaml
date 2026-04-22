@@ -7,3 +7,4 @@ services:
         arguments:
             - '@contao.routing.scope_matcher'
             - '@contao.routing.response_context_accessor'
+            - '@contao.insert_tag.parser'

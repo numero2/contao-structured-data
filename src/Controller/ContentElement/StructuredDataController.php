@@ -14,6 +14,7 @@ namespace numero2\StructuredDataBundle\Controller\ContentElement;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
+use Contao\CoreBundle\InsertTag\InsertTagParser;
 use Contao\CoreBundle\Routing\ResponseContext\JsonLd\JsonLdManager;
 use Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor;
 use Contao\CoreBundle\Routing\ScopeMatcher;
@@ -38,11 +39,17 @@ class StructuredDataController extends AbstractContentElementController {
      */
     protected ResponseContextAccessor $responseContextAccessor;
 
+    /**
+     * @var Contao\CoreBundle\InsertTag\InsertTagParser
+     */
+    private InsertTagParser $insertTagParser;
 
-    public function __construct( ScopeMatcher $scopeMatcher, ResponseContextAccessor $responseContextAccessor ) {
+
+    public function __construct( ScopeMatcher $scopeMatcher, ResponseContextAccessor $responseContextAccessor, InsertTagParser $insertTagParser ) {
 
         $this->scopeMatcher = $scopeMatcher;
         $this->responseContextAccessor = $responseContextAccessor;
+        $this->insertTagParser = $insertTagParser;
     }
 
 
@@ -59,6 +66,13 @@ class StructuredDataController extends AbstractContentElementController {
                 $responseContext = $this->responseContextAccessor->getResponseContext();
 
                 if( $responseContext?->has(JsonLdManager::class) ) {
+
+                    // replace insert tags (see #3)
+                    array_walk_recursive($jsonLd, function( &$value ) {
+                        if( is_string($value) ) {
+                            $value = $this->insertTagParser->replace($value);
+                        }
+                    });
 
                     $jsonLdManager = $responseContext->get(JsonLdManager::class);
                     $type = $jsonLdManager->createSchemaOrgTypeFromArray($jsonLd);
