@@ -11,7 +11,7 @@ This bundle provides a Content Element that allows you to easily add structured 
 
 ## System requirements
 
-* [Contao 4.13](https://github.com/contao/contao) or newer
+* [Contao 5.7](https://github.com/contao/contao) (or newer)
 
 
 ## Installation & Configuration

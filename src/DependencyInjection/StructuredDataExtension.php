@@ -20,9 +20,6 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 class StructuredDataExtension extends Extension {
 
 
-    /**
-     * {@inheritdoc}
-     */
     public function load( array $mergedConfig, ContainerBuilder $container ): void {
 
         $loader = new YamlFileLoader(
@@ -30,8 +27,6 @@ class StructuredDataExtension extends Extension {
             new FileLocator(__DIR__.'/../../config')
         );
 
-        $loader->load('controller.yaml');
-        $loader->load('listener.yaml');
         $loader->load('services.yaml');
     }
 }

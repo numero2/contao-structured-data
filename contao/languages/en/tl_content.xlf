@@ -1,42 +1,72 @@
 <?xml version="1.0"?>
 <xliff version="1.1">
-<file>
+<file source-language="en">
 <body>
     <trans-unit id="tl_content.config_legend">
-        <target>Configuration</target>
+        <source>Configuration</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataType.0">
-        <target>Structured Data Type</target>
+        <source>Structured Data Type</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataType.1">
-        <target>Select which type of structured data you want to store.</target>
+        <source>Select which type of structured data you want to store.</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataTypeCustom">
-        <target>Custom Markup</target>
+        <source>Custom Markup</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.0">
-        <target>JSON-LD</target>
+        <source>JSON-LD</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.1">
-        <target>You can also edit the content of a JSON-LD directly yourself.</target>
+        <source>You can also edit the content of a JSON-LD directly yourself.</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.0">
-        <target>JSON-LD Preview</target>
+        <source>JSON-LD Preview</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.1">
-        <target>Preview of the generated JSON-LD. Simply select "Custom Markup" as the "Structured Data Type" to manually adjust the JSON.</target>
+        <source>Preview of the generated JSON-LD. Simply select "Custom Markup" as the "Structured Data Type" to manually adjust the JSON.</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.0">
-        <target>Questions and Answers</target>
+        <source>Questions and Answers</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.1">
-        <target>You can define the respective questions and answers here.</target>
+        <source>You can define the respective questions and answers here.</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityQuestion">
-        <target>Question</target>
+        <source>Question</source>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityAnswer">
-        <target>Answer</target>
+        <source>Answer</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorSyntax">
+        <source>Invalid JSON on line %s near "%s": %s</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorDuplicateKey">
+        <source>Invalid JSON: The key "%s" appears more than once in the same object on line %s.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorNoObject">
+        <source>The JSON-LD must consist of a single object { … }.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorLocationRoot">
+        <source>Top level</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorLocationPath">
+        <source>Property "%s"</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorMissingType">
+        <source>%s: The "@type" property is missing.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorInvalidType">
+        <source>%s: "@type" must be a string or a list of strings.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorUnknownType">
+        <source>%s: The type "%s" is not a known schema.org type.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorUnknownTypeSuggestion">
+        <source>%s: The type "%s" is not a known schema.org type. Did you mean "%s"?</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorGeneric">
+        <source>The JSON-LD could not be processed: %s</source>
     </trans-unit>
 </body>
 </file>

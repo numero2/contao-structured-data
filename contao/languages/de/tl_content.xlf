@@ -1,44 +1,97 @@
 <?xml version="1.0"?>
 <xliff version="1.1">
-<file>
+<file source-language="en" target-language="de">
 <body>
     <!-- LEGENDS -->
     <trans-unit id="tl_content.config_legend">
+        <source>Configuration</source>
         <target>Konfiguration</target>
     </trans-unit>
     <!-- FIELDS -->
     <trans-unit id="tl_content.structuredDataType.0">
+        <source>Structured Data Type</source>
         <target>Typ für strukturierte Daten</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataType.1">
+        <source>Select which type of structured data you want to store.</source>
         <target>Wählen Sie welche Art von strukturierte Daten Sie hinterlegen möchten.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataTypeCustom">
+        <source>Custom Markup</source>
         <target>Eigenes Markup</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.0">
+        <source>JSON-LD</source>
         <target>JSON-LD</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSON.1">
+        <source>You can also edit the content of a JSON-LD directly yourself.</source>
         <target>Sie können den Inhalt eines JSON-LD auch direkt selbst bearbeiten.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.0">
+        <source>JSON-LD Preview</source>
         <target>JSON-LD Vorschau</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataJSONDisabled.1">
+        <source>Preview of the generated JSON-LD. Simply select "Custom Markup" as the "Structured Data Type" to manually adjust the JSON.</source>
         <target>Vorschau des generierten JSON-LD. Wählen Sie als "Typ für strukturierte Daten" einfach "Eigenes Markup" um das JSON manuell anzupassen.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.0">
+        <source>Questions and Answers</source>
         <target>Fragen und Antworten</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntity.1">
+        <source>You can define the respective questions and answers here.</source>
         <target>Sie können hier die jeweiligen Fragen und Antworten festlegen.</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityQuestion">
+        <source>Question</source>
         <target>Frage</target>
     </trans-unit>
     <trans-unit id="tl_content.structuredDataFAQPage_mainEntityAnswer">
+        <source>Answer</source>
         <target>Antwort</target>
+    </trans-unit>
+    <!-- ERRORS -->
+    <trans-unit id="tl_content.structuredDataJSONErrorSyntax">
+        <source>Invalid JSON on line %s near "%s": %s</source>
+        <target>Ungültiges JSON in Zeile %s bei „%s“: %s</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorDuplicateKey">
+        <source>Invalid JSON: The key "%s" appears more than once in the same object on line %s.</source>
+        <target>Ungültiges JSON: Der Schlüssel „%s“ kommt in Zeile %s mehrfach im selben Objekt vor.</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorNoObject">
+        <source>The JSON-LD must consist of a single object { … }.</source>
+        <target>Das JSON-LD muss aus einem einzelnen Objekt { … } bestehen.</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorLocationRoot">
+        <source>Top level</source>
+        <target>Oberste Ebene</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorLocationPath">
+        <source>Property "%s"</source>
+        <target>Eigenschaft „%s“</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorMissingType">
+        <source>%s: The "@type" property is missing.</source>
+        <target>%s: Die Angabe „@type“ fehlt.</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorInvalidType">
+        <source>%s: "@type" must be a string or a list of strings.</source>
+        <target>%s: „@type“ muss ein Text oder eine Liste von Texten sein.</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorUnknownType">
+        <source>%s: The type "%s" is not a known schema.org type.</source>
+        <target>%s: Der Typ „%s“ ist kein bekannter schema.org-Typ.</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorUnknownTypeSuggestion">
+        <source>%s: The type "%s" is not a known schema.org type. Did you mean "%s"?</source>
+        <target>%s: Der Typ „%s“ ist kein bekannter schema.org-Typ. Meinten Sie „%s“?</target>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJSONErrorGeneric">
+        <source>The JSON-LD could not be processed: %s</source>
+        <target>Das JSON-LD konnte nicht verarbeitet werden: %s</target>
     </trans-unit>
 </body>
 </file>

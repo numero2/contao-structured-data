@@ -18,8 +18,7 @@ use Contao\CoreBundle\InsertTag\InsertTagParser;
 use Contao\CoreBundle\Routing\ResponseContext\JsonLd\JsonLdManager;
 use Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor;
 use Contao\CoreBundle\Routing\ScopeMatcher;
-use Contao\System;
-use Contao\Template;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Spatie\SchemaOrg\Graph;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,39 +28,24 @@ use Symfony\Component\HttpFoundation\Response;
 class StructuredDataController extends AbstractContentElementController {
 
 
-    /**
-     * @var Contao\CoreBundle\Routing\ScopeMatcher
-     */
-    protected ScopeMatcher $scopeMatcher;
-
-    /**
-     * @var Contao\CoreBundle\Routing\ResponseContext\ResponseContextAccessor
-     */
-    protected ResponseContextAccessor $responseContextAccessor;
-
-    /**
-     * @var Contao\CoreBundle\InsertTag\InsertTagParser
-     */
-    private InsertTagParser $insertTagParser;
-
-
-    public function __construct( ScopeMatcher $scopeMatcher, ResponseContextAccessor $responseContextAccessor, InsertTagParser $insertTagParser ) {
-
-        $this->scopeMatcher = $scopeMatcher;
-        $this->responseContextAccessor = $responseContextAccessor;
-        $this->insertTagParser = $insertTagParser;
+    public function __construct(
+        private readonly ScopeMatcher $scopeMatcher,
+        private readonly ResponseContextAccessor $responseContextAccessor,
+        private readonly InsertTagParser $insertTagParser
+    ) {
     }
 
 
-    protected function getResponse( Template $template, ContentModel $model, Request $request ): Response {
+    protected function getResponse( FragmentTemplate $template, ContentModel $model, Request $request ): Response {
 
-        $json = $model->structuredDataJSON;
+        $json = (string) $model->structuredDataJSON;
+        $isBackend = $this->scopeMatcher->isBackendRequest($request);
 
-        if( !empty($json) && !$this->scopeMatcher->isBackendRequest($request) ) {
+        if( $json !== '' && !$isBackend ) {
 
-            $jsonLd = json_decode($json,true);
+            $jsonLd = json_decode($json, true);
 
-            if( $jsonLd !== null && \is_array($jsonLd) ) {
+            if( \is_array($jsonLd) ) {
 
                 $responseContext = $this->responseContextAccessor->getResponseContext();
 
@@ -69,7 +53,7 @@ class StructuredDataController extends AbstractContentElementController {
 
                     // replace insert tags (see #3)
                     array_walk_recursive($jsonLd, function( &$value ) {
-                        if( is_string($value) ) {
+                        if( \is_string($value) ) {
                             $value = $this->insertTagParser->replace($value);
                         }
                     });
@@ -85,15 +69,13 @@ class StructuredDataController extends AbstractContentElementController {
             }
         }
 
-        $template->json = $model->structuredDataJSON;
-
-        if( $this->scopeMatcher->isBackendRequest($request) ) {
-
-            return $template->getResponse();
-
-        } else {
-
+        // this element won't create any visible markup in the frontend
+        if( !$isBackend ) {
             return new Response('');
         }
+
+        $template->set('json', $json);
+
+        return $template->getResponse();
     }
 }

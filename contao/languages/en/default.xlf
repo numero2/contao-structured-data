@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <xliff version="1.1">
-	<file>
-		<body>
-			<trans-unit id="MSC.structuredData.types.custom">
-				<target>Custom Markup</target>
-			</trans-unit>
-			<trans-unit id="CTE.structured_data.0">
-				<target>Structured Data (JSON-LD)</target>
-			</trans-unit>
-			<trans-unit id="CTE.structured_data.1">
-				<target>Structured Data (JSON-LD)</target>
-			</trans-unit>
-		</body>
-	</file>
+<file source-language="en">
+<body>
+    <trans-unit id="MSC.structuredData.types.custom">
+        <source>Custom Markup</source>
+    </trans-unit>
+    <trans-unit id="CTE.structured_data.0">
+        <source>Structured Data (JSON-LD)</source>
+    </trans-unit>
+    <trans-unit id="CTE.structured_data.1">
+        <source>Structured Data (JSON-LD)</source>
+    </trans-unit>
+</body>
+</file>
 </xliff>

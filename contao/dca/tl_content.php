@@ -5,7 +5,7 @@
  *
  * @author    Benny Born <benny.born@numero2.de>
  * @license   LGPL-3.0-or-later
- * @copyright Copyright (c) 2025, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2026, numero2 - Agentur für digitales Marketing GbR
  */
 
 
@@ -29,21 +29,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['structuredDataType'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['structuredDataFAQPage_mainEntity'] = [
-    'inputType' => 'multiColumnWizard',
-    'eval' => [
-        'columnFields' => [
-            'question' => [
-                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityQuestion']
-            ,   'inputType' => 'text'
-            ]
-        ,   'answer' => [
-                'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityAnswer']
-            ,   'inputType' => 'text'
-            ]
+    'inputType'     => 'rowWizard'
+,   'fields'        => [
+        'question' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityQuestion']
+        ,   'inputType' => 'text'
         ]
-    ,   'tl_class' => 'clr'
-    ,   'doNotSaveEmpty' => true
+    ,   'answer' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_content']['structuredDataFAQPage_mainEntityAnswer']
+        ,   'inputType' => 'text'
+        ]
     ]
+,   'eval'          => ['tl_class'=>'clr', 'doNotSaveEmpty'=>true]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['structuredDataJSON'] = [
