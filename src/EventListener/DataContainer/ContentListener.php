@@ -35,6 +35,48 @@ class ContentListener {
 
 
     /**
+     * Fields without a column mapped to their path in the JSON
+     */
+    private const SIMPLE_FIELDS = [
+        'structuredDataName'            => 'name'
+    ,   'structuredDataDescription'     => 'description'
+    ,   'structuredDataUrl'             => 'url'
+    ,   'structuredDataEmail'           => 'email'
+    ,   'structuredDataTelephone'       => 'telephone'
+    ,   'structuredDataImage'           => 'image'
+    ,   'structuredDataLogo'            => 'logo'
+    ,   'structuredDataJobTitle'        => 'jobTitle'
+    ,   'structuredDataWorksFor'        => 'worksFor.name'
+    ,   'structuredDataStreetAddress'   => 'address.streetAddress'
+    ,   'structuredDataPostalCode'      => 'address.postalCode'
+    ,   'structuredDataAddressLocality' => 'address.addressLocality'
+    ,   'structuredDataAddressCountry'  => 'address.addressCountry'
+    ,   'structuredDataOpeningHours'    => 'openingHours'
+    ,   'structuredDataPriceRange'      => 'priceRange'
+    ,   'structuredDataSameAs'          => 'sameAs'
+    ,   'structuredDataBrand'           => 'brand.name'
+    ,   'structuredDataSku'             => 'sku'
+    ,   'structuredDataPrice'           => 'offers.price'
+    ,   'structuredDataPriceCurrency'   => 'offers.priceCurrency'
+    ,   'structuredDataAvailability'    => 'offers.availability'
+    ];
+
+    private const NESTED_TYPES = [
+        'worksFor'  => 'Organization'
+    ,   'address'   => 'PostalAddress'
+    ,   'brand'     => 'Brand'
+    ,   'offers'    => 'Offer'
+    ];
+
+    private ?string $activeType = null;
+
+    /**
+     * @var array<string,mixed>
+     */
+    private array $pendingValues = [];
+
+
+    /**
      * @var string[]|null
      */
     private ?array $schemaTypes = null;
@@ -78,6 +120,8 @@ class ContentListener {
                 ,   'structuredDataType,'.$fields.';'
                 ,   $GLOBALS['TL_DCA']['tl_content']['palettes']['structured_data']
                 );
+
+                $this->registerSimpleFields((string) $element->structuredDataType, explode(',', $fields));
             }
         }
 
@@ -262,6 +306,162 @@ class ContentListener {
         }
 
         return null;
+    }
+
+
+    /**
+     * Writes the values of the simple fields (Person, Product, ...) into the JSON
+     *
+     * @param \Contao\DataContainer $dc
+     */
+    #[AsCallback('tl_content', target: 'config.onsubmit')]
+    public function saveSimpleFields( DataContainer $dc ): void {
+
+        if( empty($this->pendingValues) || $this->activeType === null ) {
+            return;
+        }
+
+        $element = ContentModel::findById($dc->id);
+
+        // the type was changed with this very request, the submitted values belong to the old one
+        if( $element === null || $element->structuredDataType !== $this->activeType ) {
+            return;
+        }
+
+        $json = ['@context'=>'https://schema.org', '@type'=>$this->activeType];
+
+        foreach( $this->pendingValues as $field => $value ) {
+
+            $value = $this->valueToJson($field, $value);
+
+            if( $value === null ) {
+                continue;
+            }
+
+            $path = explode('.', self::SIMPLE_FIELDS[$field]);
+
+            if( \count($path) === 1 ) {
+                $json[$path[0]] = $value;
+            } else {
+                $json[$path[0]] ??= ['@type'=>self::NESTED_TYPES[$path[0]]];
+                $json[$path[0]][$path[1]] = $value;
+            }
+        }
+
+        $this->pendingValues = [];
+
+        $element->structuredDataJSON = json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        $element->save();
+    }
+
+
+    /**
+     * Adds the callbacks which convert the simple fields from and to the JSON
+     *
+     * @param string $type
+     * @param string[] $fields
+     */
+    private function registerSimpleFields( string $type, array $fields ): void {
+
+        $this->activeType = $type;
+
+        foreach( $fields as $field ) {
+
+            if( !isset(self::SIMPLE_FIELDS[$field]) ) {
+                continue;
+            }
+
+            // there are no columns for these fields, so empty values must not be written to the database
+            $GLOBALS['TL_DCA']['tl_content']['fields'][$field]['eval']['doNotSaveEmpty'] = true;
+
+            $GLOBALS['TL_DCA']['tl_content']['fields'][$field]['load_callback'][] = function( $value, DataContainer $dc ) use ( $field ) {
+
+                $json = json_decode((string) ($dc->getCurrentRecord()['structuredDataJSON'] ?? ''), true);
+
+                if( !\is_array($json) ) {
+                    return $field === 'structuredDataPriceCurrency' ? 'EUR' : $value;
+                }
+
+                $found = $json;
+
+                foreach( explode('.', self::SIMPLE_FIELDS[$field]) as $key ) {
+                    $found = \is_array($found) ? ($found[$key] ?? null) : null;
+                }
+
+                return $found === null ? $value : $this->valueFromJson($field, $found);
+            };
+
+            $GLOBALS['TL_DCA']['tl_content']['fields'][$field]['save_callback'][] = function( $value ) use ( $field ) {
+
+                $this->pendingValues[$field] = $value;
+
+                return null;
+            };
+        }
+    }
+
+
+    /**
+     * Converts a submitted value to the value stored in the JSON
+     *
+     * @param string $field
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    private function valueToJson( string $field, mixed $value ): mixed {
+
+        switch( $field ) {
+
+            case 'structuredDataImage':
+            case 'structuredDataLogo':
+                // resolved to a public (resized) image by the controller when the element is rendered
+                return \strlen((string) $value) === 16 ? '{{file::'.StringUtil::binToUuid($value).'}}' : null;
+
+            case 'structuredDataSameAs':
+            case 'structuredDataOpeningHours':
+                $lines = array_values(array_filter(array_map('trim', preg_split('/\R/', (string) $value))));
+                return $lines ?: null;
+
+            case 'structuredDataPrice':
+                $value = str_replace(',', '.', trim((string) $value));
+                return $value !== '' ? $value : null;
+
+            case 'structuredDataAvailability':
+                return $value ? 'https://schema.org/'.$value : null;
+        }
+
+        $value = trim((string) $value);
+
+        return $value !== '' ? $value : null;
+    }
+
+
+    /**
+     * Converts a value stored in the JSON back to the value of the form field
+     *
+     * @param string $field
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    private function valueFromJson( string $field, mixed $value ): mixed {
+
+        switch( $field ) {
+
+            case 'structuredDataImage':
+            case 'structuredDataLogo':
+                return preg_match('/\{\{file::([0-9a-f-]{36})\}\}/', (string) $value, $match) ? StringUtil::uuidToBin($match[1]) : null;
+
+            case 'structuredDataSameAs':
+            case 'structuredDataOpeningHours':
+                return implode("\n", (array) $value);
+
+            case 'structuredDataAvailability':
+                return str_replace('https://schema.org/', '', (string) $value);
+        }
+
+        return \is_scalar($value) ? (string) $value : null;
     }
 
 

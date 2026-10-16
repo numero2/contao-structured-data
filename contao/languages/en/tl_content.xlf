@@ -68,6 +68,123 @@
     <trans-unit id="tl_content.structuredDataJSONErrorGeneric">
         <source>The JSON-LD could not be processed: %s</source>
     </trans-unit>
+    <trans-unit id="tl_content.structuredDataName.0">
+        <source>Name</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataName.1">
+        <source>The name of the person, organization or product.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataDescription.0">
+        <source>Description</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataDescription.1">
+        <source>A short description.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataUrl.0">
+        <source>URL</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataUrl.1">
+        <source>Link to the website.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataEmail.0">
+        <source>E-mail address</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataEmail.1">
+        <source>Public e-mail address.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataTelephone.0">
+        <source>Phone</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataTelephone.1">
+        <source>Phone number including country code, e.g. +49 6131 123456.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataImage.0">
+        <source>Image</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataImage.1">
+        <source>Choose an image.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataLogo.0">
+        <source>Logo</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataLogo.1">
+        <source>Choose the logo.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJobTitle.0">
+        <source>Job title</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataJobTitle.1">
+        <source>The position of the person.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataWorksFor.0">
+        <source>Employer</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataWorksFor.1">
+        <source>Name of the organization the person works for.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataStreetAddress.0">
+        <source>Street and number</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPostalCode.0">
+        <source>Postal code</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataAddressLocality.0">
+        <source>City</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataAddressCountry.0">
+        <source>Country</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataAddressCountry.1">
+        <source>Two-letter country code, e.g. DE.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataOpeningHours.0">
+        <source>Opening hours</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataOpeningHours.1">
+        <source>One entry per line, e.g. "Mo-Fr 09:00-17:00".</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPriceRange.0">
+        <source>Price range</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPriceRange.1">
+        <source>e.g. €€ or "10-30 EUR".</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataSameAs.0">
+        <source>Profiles</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataSameAs.1">
+        <source>One URL per line, e.g. social media profiles.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataBrand.0">
+        <source>Brand</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataBrand.1">
+        <source>The brand of the product.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataSku.0">
+        <source>SKU</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataSku.1">
+        <source>Article number.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPrice.0">
+        <source>Price</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPrice.1">
+        <source>Price without currency symbol, e.g. 19.90.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPriceCurrency.0">
+        <source>Currency</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataPriceCurrency.1">
+        <source>Three-letter currency code, e.g. EUR.</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataAvailability.0">
+        <source>Availability</source>
+    </trans-unit>
+    <trans-unit id="tl_content.structuredDataAvailability.1">
+        <source>Current availability of the product.</source>
+    </trans-unit>
 </body>
 </file>
 </xliff>
